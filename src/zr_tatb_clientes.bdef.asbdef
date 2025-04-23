@@ -1,0 +1,51 @@
+managed implementation in class ZBP_R_TATB_CLIENTES unique;
+strict ( 2 );
+with draft;
+define behavior for ZR_TATB_CLIENTES alias ZrTatbClientes
+persistent table ZTATB_CLIENTES
+draft table ZTATB_CLIENTES_D
+etag master Locallastchangedat
+lock master total etag Lastchangedat
+authorization master( global )
+
+{
+  field ( readonly )
+   ClienteId,
+   Createdby,
+   Createdat,
+   Locallastchangedby,
+   Locallastchangedat,
+   Lastchangedat;
+
+  field ( numbering : managed )
+   ClienteId;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZTATB_CLIENTES
+  {
+    ClienteId = cliente_id;
+    Nome = nome;
+    Rua = rua;
+    Cep = cep;
+    Cidade = cidade;
+    Pais = pais;
+    Telefone = telefone;
+    Email = email;
+    Site = site;
+    Createdby = createdby;
+    Createdat = createdat;
+    Locallastchangedby = locallastchangedby;
+    Locallastchangedat = locallastchangedat;
+    Lastchangedat = lastchangedat;
+  }
+}
